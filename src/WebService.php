@@ -352,7 +352,15 @@ class WebService{
         $ch = curl_init( $this->requestUrl );
 
         if( $isPost ){
-            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+            if (Config::has('googlemaps.service.computeroutes.FieldMask')) {
+                $headers = [
+                    'Content-Type: application/json',
+                    'X-Goog-FieldMask: '. Config::get('googlemaps.service.computeroutes.FieldMask'),
+                ];
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            } else {
+                curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+            }
             curl_setopt($ch,CURLOPT_POST, 1);
             curl_setopt($ch,CURLOPT_POSTFIELDS, $isPost );
         }

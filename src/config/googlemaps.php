@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'key'       => 'ADD_YOUR_SERVICE_KEY_HERE',
+    'key'       => env('GOOGLE_MAPS_GEOCODING_API_KEY', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -25,7 +25,7 @@ return [
     | SSL peer (SSL certificate validation)
     |
      */
-    'ssl_verify_peer' => FALSE,
+    'ssl_verify_peer' => false,
 
     /*
      |--------------------------------------------------------------------------
@@ -153,6 +153,19 @@ return [
                                                     ]
         ],
 
+        'computeroutes' => [
+                        'url'                   => 'https://routes.googleapis.com/directions/v2:computeRoutes?',
+                        'type'                  => 'POST',
+                        'FieldMask'             => 'routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline',
+                        'key'                   =>  null,
+                        'endpoint'              =>  false,
+                        'responseDefaultKey'    => 'origin_addresses',
+                        'param'                 => [
+                                                    'origin'        => null,
+                                                    'destination'   => null,
+                                                    'units'          => 'METRIC',
+                                                    ]
+        ],
 
         'elevation' => [
                         'url'                   => 'https://maps.googleapis.com/maps/api/elevation/',
