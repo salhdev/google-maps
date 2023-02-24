@@ -379,5 +379,42 @@ class ExampleController extends Controller {
        dd($d);
    }    
    
-   
+   public function getComputeRoutes() {
+
+        $response = \GoogleMaps::load('computeroutes')
+                ->setParam([
+                    'origin' => [
+                        'location' => [
+                            'latLng' => [
+                                'latitude' => 37.419734,
+                                'longitude' => -122.0827784
+                            ]
+                        ]
+                    ],
+                    'destination' => [
+                        'location' => [
+                            'latLng' => [
+                                'latitude' => 37.417670,
+                                'longitude' => -122.079595
+                            ]
+                        ]
+                    ],
+                ])
+                ->get();
+        dd($response);
+/*
+{\n
+  "routes": [\n
+    {\n
+      "distanceMeters": 773,\n
+      "duration": "153s",\n
+      "polyline": {\n
+        "encodedPolyline": "ipkcFfichVnP@j@Bd@gU{E?"\n
+      }\n
+    }\n
+  ]\n
+}\n
+
+ */
+   }
 }
